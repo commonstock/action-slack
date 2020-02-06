@@ -39,9 +39,8 @@ export class Client {
   async success(text: string) {
     const template = await this.payloadTemplate();
     template.attachments[0].color = 'good';
-    template.text += ':white_check_mark: Succeeded GitHub Actions\n';
-    template.text += text;
-
+    // template.text += ':white_check_mark: Succeeded GitHub Actions\n';
+    // template.text += text;
     return template;
   }
 
@@ -49,17 +48,16 @@ export class Client {
     const template = await this.payloadTemplate();
     template.attachments[0].color = 'danger';
     template.text += this.mentionText(this.with.only_mention_fail);
-    template.text += ':no_entry: Failed GitHub Actions\n';
-    template.text += text;
-
+    // template.text += ':no_entry: Failed GitHub Actions\n';
+    // template.text += text;
     return template;
   }
 
   async cancel(text: string) {
     const template = await this.payloadTemplate();
     template.attachments[0].color = 'warning';
-    template.text += ':warning: Canceled GitHub Actions\n';
-    template.text += text;
+    // template.text += ':warning: Canceled GitHub Actions\n';
+    // template.text += text;
 
     return template;
   }
