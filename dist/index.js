@@ -3905,7 +3905,6 @@ function run() {
             let status = core.getInput('status', { required: true });
             status = status.toLowerCase();
             const mention = core.getInput('mention');
-            const author_name = core.getInput('author_name');
             const only_mention_fail = core.getInput('only_mention_fail');
             const text = core.getInput('text');
             const username = core.getInput('username');
@@ -3915,7 +3914,6 @@ function run() {
             const rawPayload = core.getInput('payload');
             core.debug(`status: ${status}`);
             core.debug(`mention: ${mention}`);
-            core.debug(`author_name: ${author_name}`);
             core.debug(`only_mention_fail: ${only_mention_fail}`);
             core.debug(`text: ${text}`);
             core.debug(`username: ${username}`);
@@ -3926,7 +3924,6 @@ function run() {
             const client = new client_1.Client({
                 status,
                 mention,
-                author_name,
                 only_mention_fail,
                 username,
                 icon_emoji,
@@ -10386,7 +10383,6 @@ class Client {
                 attachments: [
                     {
                         color: '',
-                        author_name: this.with.author_name,
                         fields: yield this.fields(),
                     },
                 ],

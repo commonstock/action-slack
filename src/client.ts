@@ -5,7 +5,6 @@ import { IncomingWebhook, IncomingWebhookSendArguments } from '@slack/webhook';
 export interface With {
   status: string;
   mention: string;
-  author_name: string;
   only_mention_fail: string;
   username: string;
   icon_emoji: string;
@@ -81,7 +80,6 @@ export class Client {
       attachments: [
         {
           color: '',
-          author_name: this.with.author_name,
           fields: await this.fields(),
         },
       ],
