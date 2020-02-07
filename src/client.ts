@@ -116,21 +116,24 @@ export class Client {
   }
 
   private get commit() {
-    const { sha } = github.context;
-    const { owner, repo } = github.context.repo;
 
     return {
       title: 'commit',
-      value: `<https://github.com/${owner}/${repo}/commit/${sha}|${sha}>`,
+      value: ``,
       short: true,
     };
   }
 
   private get repo() {
+    const { sha } = github.context;
     const { owner, repo } = github.context.repo;
-
+    const value = `
+    repo: <https://github.com/${owner}/${repo}|${owner}/${repo}>
+    commit: <https://github.com/${owner}/${repo}/commit/${sha}|${sha}>
+    `;
     return {
-      title: `repo: <https://github.com/${owner}/${repo}|${owner}/${repo}>`,
+      title: 'links',
+      value,
       short: true,
     };
   }

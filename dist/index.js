@@ -10340,7 +10340,7 @@ class Client {
             const template = yield this.payloadTemplate();
             template.attachments[0].color = 'good';
             // template.text += ':white_check_mark: Succeeded GitHub Actions\n';
-            // template.text += text;
+            template.text += text;
             return template;
         });
     }
@@ -10350,7 +10350,7 @@ class Client {
             template.attachments[0].color = 'danger';
             template.text += this.mentionText(this.with.only_mention_fail);
             // template.text += ':no_entry: Failed GitHub Actions\n';
-            // template.text += text;
+            template.text += text;
             return template;
         });
     }
@@ -10359,7 +10359,7 @@ class Client {
             const template = yield this.payloadTemplate();
             template.attachments[0].color = 'warning';
             // template.text += ':warning: Canceled GitHub Actions\n';
-            // template.text += text;
+            template.text += text;
             return template;
         });
     }
@@ -10403,7 +10403,7 @@ class Client {
                 {
                     title: 'message',
                     value: commit.data.commit.message,
-                    short: true,
+                    short: false,
                 },
                 this.commit,
                 {
@@ -10419,19 +10419,22 @@ class Client {
         });
     }
     get commit() {
-        const { sha } = github.context;
-        const { owner, repo } = github.context.repo;
         return {
             title: 'commit',
-            value: `<https://github.com/${owner}/${repo}/commit/${sha}|${sha}>`,
+            value: ``,
             short: true,
         };
     }
     get repo() {
+        const { sha } = github.context;
         const { owner, repo } = github.context.repo;
+        const value = `
+    repo: <https://github.com/${owner}/${repo}|${owner}/${repo}>
+    commit: <https://github.com/${owner}/${repo}/commit/${sha}|${sha}>
+    `;
         return {
-            title: 'repo',
-            value: `<https://github.com/${owner}/${repo}|${owner}/${repo}>`,
+            title: 'links',
+            value,
             short: true,
         };
     }
