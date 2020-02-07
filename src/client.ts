@@ -35,28 +35,28 @@ export class Client {
     this.webhook = new IncomingWebhook(webhookUrl);
   }
 
-  async success(text: string) {
+  async success(text?: string) {
     const template = await this.payloadTemplate();
     template.attachments[0].color = 'good';
     // template.text += ':white_check_mark: Succeeded GitHub Actions\n';
-    // template.text += text;
+    template.text += text;
     return template;
   }
 
-  async fail(text: string) {
+  async fail(text?: string) {
     const template = await this.payloadTemplate();
     template.attachments[0].color = 'danger';
     template.text += this.mentionText(this.with.only_mention_fail);
     // template.text += ':no_entry: Failed GitHub Actions\n';
-    // template.text += text;
+    template.text += text;
     return template;
   }
 
-  async cancel(text: string) {
+  async cancel(text?: string) {
     const template = await this.payloadTemplate();
     template.attachments[0].color = 'warning';
     // template.text += ':warning: Canceled GitHub Actions\n';
-    // template.text += text;
+    template.text += text;
 
     return template;
   }
@@ -100,7 +100,7 @@ export class Client {
       {
         title: 'message',
         value: commit.data.commit.message,
-        short: true,
+        short: false,
       },
       this.commit,
       {
@@ -130,8 +130,7 @@ export class Client {
     const { owner, repo } = github.context.repo;
 
     return {
-      title: 'repo',
-      value: `<https://github.com/${owner}/${repo}|${owner}/${repo}>`,
+      title: `repo: <https://github.com/${owner}/${repo}|${owner}/${repo}>`,
       short: true,
     };
   }
