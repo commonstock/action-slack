@@ -48,7 +48,7 @@ export class Client {
     template.attachments[0].color = 'danger';
     template.text += this.mentionText(this.with.only_mention_fail);
     // template.text += ':no_entry: Failed GitHub Actions\n';
-    template.text += text;
+    template.text += text || '';
     return template;
   }
 
@@ -102,21 +102,17 @@ export class Client {
         value: commit.data.commit.message,
         short: false,
       },
-      this.commit,
       {
         title: 'author',
         value: `${author.name}<${author.email}>`,
         short: true,
       },
-      this.action,
       this.eventName,
       this.ref,
-      this.workflow,
     ];
   }
 
   private get commit() {
-
     return {
       title: 'commit',
       value: ``,
@@ -128,24 +124,15 @@ export class Client {
     const { sha } = github.context;
     const { owner, repo } = github.context.repo;
     const value = `
-    repo: <https://github.com/${owner}/${repo}|${owner}/${repo}>
-    commit: <https://github.com/${owner}/${repo}/commit/${sha}|${sha}>
-    `;
+workflow: ${github.context.workflow}
+action: <https://github.com/${owner}/${repo}/commit/${sha}/checks|action>
+repo: <https://github.com/${owner}/${repo}|${owner}/${repo}>
+commit: <https://github.com/${owner}/${repo}/commit/${sha}|${sha}>
+`;
     return {
-      title: 'links',
+      title: '',
       value,
-      short: true,
-    };
-  }
-
-  private get action() {
-    const { sha } = github.context;
-    const { owner, repo } = github.context.repo;
-
-    return {
-      title: 'action',
-      value: `<https://github.com/${owner}/${repo}/commit/${sha}/checks|action>`,
-      short: true,
+      short: false,
     };
   }
 
@@ -159,10 +146,6 @@ export class Client {
 
   private get ref() {
     return { title: 'ref', value: github.context.ref, short: true };
-  }
-
-  private get workflow() {
-    return { title: 'workflow', value: github.context.workflow, short: true };
   }
 
   private mentionText(mention: string) {
