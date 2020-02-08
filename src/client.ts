@@ -123,10 +123,9 @@ export class Client {
   private get repo() {
     const { sha } = github.context;
     const { owner, repo } = github.context.repo;
-    console.log('gh', github.context);
     const value = `
 workflow: ${github.context.workflow}
-action: <https://github.com/${owner}/${repo}/actions/runs/${process.env.GITHUB_RUN_ID}>
+action: <https://github.com/${owner}/${repo}/actions/runs/${process.env.GITHUB_RUN_ID}|actions/runs/${process.env.GITHUB_RUN_ID}>
 repo: <https://github.com/${owner}/${repo}|${owner}/${repo}>
 commit: <https://github.com/${owner}/${repo}/commit/${sha}|${sha}>
 `;
