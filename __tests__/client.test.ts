@@ -12,7 +12,7 @@ const fixedFields = () => {
       title: '',
       value: `
 workflow: PR Checks
-action: <https://github.com/8398a7/action-slack/commit/b24f03a32e093fe8d55e23cfd0bb314069633b2f/checks|action>
+action: <https://github.com/8398a7/action-slack/actions/runs/undefined>
 repo: <https://github.com/8398a7/action-slack|8398a7/action-slack>
 commit: <https://github.com/8398a7/action-slack/commit/b24f03a32e093fe8d55e23cfd0bb314069633b2f|b24f03a32e093fe8d55e23cfd0bb314069633b2f>
 `,

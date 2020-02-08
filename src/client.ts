@@ -126,7 +126,7 @@ export class Client {
     console.log('gh', github.context);
     const value = `
 workflow: ${github.context.workflow}
-action: <https://github.com/${owner}/${repo}/actions/runs/${process.env.GITHUB_RUN_ID}?check_suite_focus=true
+action: <https://github.com/${owner}/${repo}/actions/runs/${process.env.GITHUB_RUN_ID}>
 repo: <https://github.com/${owner}/${repo}|${owner}/${repo}>
 commit: <https://github.com/${owner}/${repo}/commit/${sha}|${sha}>
 `;
